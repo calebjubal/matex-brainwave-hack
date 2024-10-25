@@ -1,23 +1,31 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
-import { BarChart, GitBranch, GitCommit, GitPullRequest, Settings, Users } from 'lucide-react'
+import { useState } from 'react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { Card } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { BarChart, GitBranch, GitCommit, GitPullRequest, Settings, Users } from 'lucide-react';
+
+// Define the type for a commit object
+type Commit = {
+  id: number;
+  repo: string;
+  message: string;
+  date: string;
+  language: string;
+};
 
 // Mock data for commits
-const commits = [
+const commits: Commit[] = [
   { id: 1, repo: 'matex-ai/code-review', message: 'Update AI model', date: '2024-10-25', language: 'Python' },
   { id: 2, repo: 'matex-ai/frontend', message: 'Refactor dashboard component', date: '2024-10-24', language: 'TypeScript' },
   { id: 3, repo: 'matex-ai/docs', message: 'Add API documentation', date: '2024-10-23', language: 'Markdown' },
-]
+];
 
 export default function Dashboard() {
-  const [selectedCommit, setSelectedCommit] = useState(null)
+  const [selectedCommit, setSelectedCommit] = useState<Commit | null>(null);
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -110,8 +118,8 @@ export default function Dashboard() {
       <Dialog open={selectedCommit !== null} onOpenChange={() => setSelectedCommit(null)}>
         <DialogContent className="max-w-4xl">
           <DialogHeader>
-            <DialogTitle>{selectedCommit?.message}</DialogTitle>
-            <DialogDescription>{selectedCommit?.repo} • {selectedCommit?.date}</DialogDescription>
+            <DialogTitle>{selectedCommit?.message || 'Commit Details'}</DialogTitle>
+            <DialogDescription>{selectedCommit ? `${selectedCommit.repo} • ${selectedCommit.date}` : ''}</DialogDescription>
           </DialogHeader>
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-gray-100 p-4 rounded">
@@ -133,12 +141,12 @@ function exampleFunction() {
               </div>
               <p className="text-sm">
                 Great job on the update! The code is clean and follows best practices. 
-                Consider adding more comments to explain the function's purpose and parameters.
+                Consider adding more comments to explain the function&apos;s purpose and parameters.
               </p>
             </div>
           </div>
         </DialogContent>
       </Dialog>
     </div>
-  )
+  );
 }
