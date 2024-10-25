@@ -1,10 +1,6 @@
-Here's the complete frontend README in markdown format:
-
----
 
 ### Frontend README (`frontend/README.md`)
 
-```markdown
 # Code Review Bot - Frontend
 
 This is the frontend for the Code Review Bot, a web-based interface where users can view code reviews for their GitHub repositories in real-time. The frontend interacts with the backend APIs to display commit analysis, reviews, and ratings based on code quality.
